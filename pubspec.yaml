@@ -41,6 +41,7 @@ dependencies:
   bloc: ^8.1.4
   equatable: ^2.0.5
   http: ^1.2.1
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/animations/
     - assets/images/
     - assets/fonts/
     - assets/images/icons/
