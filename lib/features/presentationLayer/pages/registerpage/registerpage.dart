@@ -12,7 +12,9 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(''),),
+      appBar: AppBar(title: const Text(''),iconTheme: const IconThemeData(
+        color: Colors.red
+      ),),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

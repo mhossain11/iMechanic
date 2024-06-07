@@ -62,7 +62,7 @@ class _SearchAllPostState extends State<SearchAllPost> {
                 hint: 'Search',
                 keyboardType: TextInputType.text,
                 controller: searchController,
-                filled: true,
+                //filled: true,
                 suffixIcon: IconButton(
                     onPressed: (){setState(() {
                       searchController.clear();

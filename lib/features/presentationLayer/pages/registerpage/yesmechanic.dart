@@ -11,6 +11,7 @@ import 'package:imechanic/features/presentationLayer/widget/imagepicker.dart';
 
 import '../../../../core/util/images.dart';
 import '../../widget/buttons.dart';
+import '../../widget/other/popupicon.dart';
 import '../../widget/textformfield.dart';
 
 class YesMechanic extends StatefulWidget {
@@ -31,13 +32,12 @@ class _YesMechanicState extends State<YesMechanic> {
   final TextEditingController  passwordController = TextEditingController();
   final TextEditingController conformPasswordController = TextEditingController();
   String dropdownValue ='';
+  String specialistDropdownValue ='';
   File? proofImage;
   File? profileImage;
   late ImagePickers imagePickers ;
  late MechanicRegisterBloc machanicRegiterBloc ;
-  errorText(txt){
-   print("Invalid, $txt");
- }
+  String errorText = "Invalid";
 
   @override
   void initState() {
@@ -85,135 +85,240 @@ class _YesMechanicState extends State<YesMechanic> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 10,),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  height: 50,
+                  child: TextFormFields(
+                    controller: fullNameController,
+                    hint: 'Enter full Name',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    minLines: 1,
+                    maxLines: 1,
+                    cursorColor: Colors.red,
+                    keyboardType: TextInputType.text,
+                    enabledBorderSide: const BorderSide(color: Colors.grey),
+                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    levelText: const Text('Full name'),
+                    validators: (String value) {
+                      return value.isNotEmpty
+                          ? null
+                          : errorText;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  height: 50,
+                  child: TextFormFields(
+                    controller: emailAddressController,
+                    hint: 'Enter valid Email',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    minLines: 1,
+                    maxLines: 1,
+                    cursorColor: Colors.red,
+                    keyboardType: TextInputType.emailAddress,
+                    enabledBorderSide: const BorderSide(color: Colors.grey),
+                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    levelText: const Text('Email'),
+                    validators: (String value) {
+                      return value.isNotEmpty
+                          ? null
+                          : errorText;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  height: 50,
+                  child: TextFormFields(
+                    controller:numberController,
+                    hint: 'Enter mobile number',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    minLines: 1,
+                    maxLines: 1,
+                    cursorColor: Colors.red,
+                    keyboardType: TextInputType.number,
+                    enabledBorderSide: const BorderSide(color: Colors.grey),
+                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    levelText: const Text('Mobile Number'),
+                    validators: (String value) {
+                      return value.isNotEmpty
+                          ? null
+                          : errorText;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  height: 50,
+                  child: TextFormFields(
+                    controller: userNameController,
+                    hint: 'Enter user name',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    minLines: 1,
+                    maxLines: 1,
+                    cursorColor: Colors.red,
+                    keyboardType: TextInputType.text,
+                    enabledBorderSide: const BorderSide(color: Colors.grey),
+                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    levelText: const Text('User Name'),
+                    validators: (String value) {
+                      return value.isNotEmpty
+                          ? null
+                          : errorText;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 345,
+                      height: 50,
+                      child: TextFormFields(
+                        controller: passwordController,
+                        hint: 'Enter password',
+                        hintStyle: TextStyle(color: Colors.grey[400]),
+                        minLines: 1,
+                        maxLines: 1,
+                        cursorColor: Colors.red,
+                        keyboardType: TextInputType.text,
+                        enabledBorderSide: const BorderSide(color: Colors.grey),
+                        focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                        levelText: const Text('Password'),
+                        validators: (String value) {
+                          return value.isNotEmpty
+                              ? null
+                              : errorText;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 20,
+                        height: 30,
+                        child:   PopupIcons(
+                            icon: Icons.info_rounded,
+                            color: Color(0xffe1306c),
+                            text: '8 Character Password ')
 
-                TextFormFields(
-                  controller: fullNameController,
-                  hint: 'Full Name',
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  enabledBorderSide: const BorderSide(color: Colors.grey),
-                  focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                  validators: (String value) {
-                    return value.isNotEmpty
-                        ? null
-                        : errorText('Enter your  Full Name!');
-                    },
+                    )
+                  ],
                 ),
                 const SizedBox(height: 10,),
-                TextFormFields(
-                  controller: emailAddressController,
-                  hint: 'Email',
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.emailAddress,
-                  enabledBorderSide: const BorderSide(color: Colors.grey),
-                  focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                  validators: (String value) {
-                    return value.isNotEmpty
-                        ? null
-                        : errorText('Enter your  Email!');
+                SizedBox(
+                  height: 50,
+                  child: TextFormFields(
+                    controller: conformPasswordController,
+                    hint: 'Enter conform password',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    minLines: 1,
+                    maxLines: 1,
+                    cursorColor: Colors.red,
+                    keyboardType: TextInputType.text,
+                    enabledBorderSide: const BorderSide(color: Colors.grey),
+                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    levelText: const Text('Conform Password'),
+                    validators: (String value) {
+                      return value.isNotEmpty
+                          ? null
+                          : errorText;
                     },
+                  ),
                 ),
                 const SizedBox(height: 10,),
-                TextFormFields(
-                  controller: numberController,
-                  hint: 'Mobile Number',
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.number,
-                  enabledBorderSide: const BorderSide(color: Colors.grey),
-                  focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                  validators: (String value) {
-                    return value.isNotEmpty
-                        ? null
-                        : errorText('Enter your  Mobile Number!');
-                    },
-                ),
+                Center(child: dropDownButtons()),
                 const SizedBox(height: 10,),
-                TextFormFields(
-                  controller: userNameController,
-                  hint: 'User Name',
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  enabledBorderSide: const BorderSide(color: Colors.grey),
-                  focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                  validators: (String value) {
-                    return value.isNotEmpty
-                        ? null
-                        : errorText('Enter your  User Name!');
-                    },
-                ),
-                const SizedBox(height: 10,),
-                TextFormFields(
-                  controller: passwordController,
-                  hint: 'Password',
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  enabledBorderSide: const BorderSide(color: Colors.grey),
-                  focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                  validators: (String value) {
-                    return value.isNotEmpty
-                        ? null
-                        : errorText('Enter your  password!');
-                    },
-                ),
-                const SizedBox(height: 10,),
-                TextFormFields(
-                  controller: conformPasswordController,
-                  hint: 'Conform Password',
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  enabledBorderSide: const BorderSide(color: Colors.grey),
-                  focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                  validators: (String value) {
-                    return value.isNotEmpty
-                        ? null
-                        : errorText('Enter your  Conform Password!');
-                    },
-                ),
-                const SizedBox(height: 10,),
-                 Center(child: dropDownButtons()),
-                const SizedBox(height: 5,),
-                specialistTextInput(),
+                // specialistTextInput(),
+                Center(child: specialistDropDownButtons()),
                 const SizedBox(height: 10,),
                 profileImage != null
-                    ? Image.file(profileImage!, width: 160, height: 160, fit: BoxFit.cover,)
+                    ? Image.file(
+                  profileImage!, width: 160, height: 160, fit: BoxFit.cover,)
                     : const SizedBox(),
                 const SizedBox(height: 10,),
-                ElevatedButtons(
-                  onPressed: () {
-                    setState(() {
-                      profileImages();
-                    });
-                  },
-                  side: const BorderSide(color: Color(0xffc1262c)),
-                  fixedSize: const Size(300, 50),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  child:const Text('Attach profile image', style: TextStyle(color: Colors.black)) ,
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 345,
+                      height: 50,
+                      child: ElevatedButtons(
+                          onPressed: () {
+                            profileImages();
+                          },
+                          side: const BorderSide(color: Color(0xffc1262c)),
+                          fixedSize: const Size(300, 50),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(5))),
+                          child:const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.person),
+                              SizedBox(width: 5,),
+                              Text('Attach profile image', style: TextStyle(color: Colors.black)) ,
+                            ],
+                          )
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 20,
+                        height: 30,
+                        child:   PopupIcons(
+                            icon: Icons.info_rounded,
+                            color: Color(0xffe1306c),
+                            text: '8 Character Password ')
+
+                    )
+                  ],
                 ),
+
                 const SizedBox(height: 10,),
                 proofImage != null
                     ? Image.file(
                   proofImage!, width: 160, height: 160, fit: BoxFit.cover,)
                     : const SizedBox(),
                 const SizedBox(height: 10,),
-            ElevatedButtons(
-              onPressed: () {
-                setState(() {
-                  imageGallery();
-                });
-              },
-              side: const BorderSide(color: Color(0xffc1262c)),
-              fixedSize: const Size(300, 50),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child:const Text('Attach proof', style: TextStyle(color: Colors.black)) ,
-            ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 345,
+                      height: 50,
+                      child:  ElevatedButtons(
+                        onPressed: () {
+                          imageGallery();
+                          /* setState(() {
+                      imagePickers.imageGallery(image);
+                    });*/
+                        },
+                        side: const BorderSide(color: Color(0xffc1262c)),
+                        fixedSize: const Size(300, 50),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child:const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.image_outlined),
+                            SizedBox(width: 5,),
+                            Text('Attach proof', style: TextStyle(color: Colors.black)),
+                          ],
+                        ) ,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: 20,
+                        height: 30,
+                        child:   PopupIcons(
+                            icon: Icons.info_rounded,
+                            color: Color(0xffe1306c),
+                            text: '8 Character Password ')
+
+                    )
+                  ],
+                ),
+
+
+
                 const SizedBox(height: 10,),
                 BlocListener<MechanicRegisterBloc, MechanicRegisterState>(
                   bloc:  machanicRegiterBloc,
@@ -280,7 +385,7 @@ class _YesMechanicState extends State<YesMechanic> {
       validators: (String value) {
         return value.isNotEmpty
             ? null
-            : errorText('Enter your Specialist makes');
+            : errorText;
       },
 
     );
@@ -335,5 +440,28 @@ class _YesMechanicState extends State<YesMechanic> {
 
           }),
     );
+  }
+  Widget specialistDropDownButtons(){
+    return DropdownButtonFormField(
+        icon: const Icon(Icons.arrow_drop_down),
+        value: specialistDropdownValue,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          // labelText: 'experience level'
+        ),
+        //which do you specialist in car?
+        items: const [
+          DropdownMenuItem(value: '',child: Text('Select specialist car name',style: TextStyle(color: Colors.grey),)),
+          DropdownMenuItem(value: '0',child: Text('Mechanic')),
+          DropdownMenuItem(value: '1',child: Text('Senior')),
+          DropdownMenuItem(value: '2',child: Text('Master technician')),
+
+        ],
+        onChanged: (String? newValue){
+          setState(() {
+            dropdownValue = newValue!;
+          });
+
+        });
   }
 }

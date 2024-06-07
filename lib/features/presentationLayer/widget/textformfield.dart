@@ -10,15 +10,17 @@ class TextFormFields extends StatelessWidget{
   final BorderSide? enabledBorderSide;
   final BorderSide? focusedBorderSide;
   final String? Function(String) validators;
-  final Function(String)? onChanged;
   final Widget? suffixIcon;
   final bool? obscureText;
-  final bool? filled;
+  final Widget? levelText;
+  final Color? cursorColor;
+  final TextStyle? hintStyle;
+  final void Function(String)? onChanged;
 
   const TextFormFields({super.key, required this.hint,  this.minLines,
-     this.maxLines, required this.keyboardType, this.enabledBorderSide,
+    this.maxLines, required this.keyboardType, this.enabledBorderSide,
     required this.controller,this.focusedBorderSide, this.maxLength, this.suffixIcon,
-    this.obscureText=false, required this.validators, this.onChanged, this.filled, });
+    this.obscureText=false, required this.validators, this.levelText, this.cursorColor, this.hintStyle, this.onChanged, });
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +33,19 @@ class TextFormFields extends StatelessWidget{
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLines: maxLines,
       keyboardType: keyboardType,
+      cursorColor: cursorColor,
       decoration: InputDecoration(
-        filled: false ?? filled,
-        suffixIcon: suffixIcon,
-        enabledBorder: OutlineInputBorder(
-            borderSide: enabledBorderSide ?? const BorderSide()
-        ),
-        focusedBorder: OutlineInputBorder(
-            borderSide: focusedBorderSide ?? const BorderSide()
-        ),
-        hintText: hint,
+          label: levelText,
+          suffixIcon: suffixIcon,
+          enabledBorder: OutlineInputBorder(
+            borderSide: enabledBorderSide ?? const BorderSide(color: Colors.white),
+
+          ),
+          focusedBorder: OutlineInputBorder(
+              borderSide: focusedBorderSide ?? const BorderSide(color: Colors.white)
+          ),
+          hintText: hint,
+          hintStyle: hintStyle
 
       ),
 

@@ -18,7 +18,7 @@ class Dashboard extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: CircleAvatar(
             radius: 15,
-            backgroundImage:AssetImage('assets/images/others/ImechanicLogo-01.png'),
+            backgroundImage:AssetImage('assets/images/others/screen3.png'),
           ),
         ),
         actions: [

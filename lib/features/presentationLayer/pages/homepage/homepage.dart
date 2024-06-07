@@ -18,7 +18,7 @@ class Homepage extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                  height: 58,
+                  height: 50,
                   onPressed: (){},
                   color: Colors.white,
                   child: const Text('About Us',style: TextStyle(color: Colors.grey),)),
@@ -26,7 +26,7 @@ class Homepage extends StatelessWidget {
             const SizedBox(width: 5,),
             Expanded(
               child: CustomButton(
-                  height: 58,
+                  height: 50,
                   onPressed: (){},
                   color: Colors.white,
                   child: const Text('Contact Us',style: TextStyle(color: Colors.grey),)),
@@ -40,17 +40,18 @@ class Homepage extends StatelessWidget {
         children: [
           SizedBox(
           width: 300,
-          child: Image.asset('assets/images/others/ImechanicLogo-01.png',
+          child: Image.asset('assets/animations/surefix2.png',
             fit: BoxFit.fitWidth,),),
 
 
-          const SizedBox(height: 40,),
+          const SizedBox(height: 40,), 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
             CustomButton(
-              height: 58,
+              height: 50,
               width: 340,
+              elevation: 4,
               color: const Color(0xffc1262c),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const RegisterPage()));
@@ -62,13 +63,21 @@ class Homepage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomButton(
-                  height: 58,
-                  width: 340,
+              ElevatedButtons(
                   onPressed: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginPage()));
                   },
-                  color: Colors.white,
+
+                    // maximumSize: const Size(340, 50),
+                    minimumSize: const Size(340, 50),
+                    backgroundColor: Colors.white,
+                    elevation: 4,
+                    shadowColor: Colors.black,
+                    side: const BorderSide(color: Colors.red,width: 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+
                   child: const Text('Log In',style: TextStyle(color: Color(0xffc1262c)),))
             ],
           ),

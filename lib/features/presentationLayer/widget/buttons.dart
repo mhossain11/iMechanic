@@ -54,18 +54,26 @@ class ElevatedButtons extends StatelessWidget{
   final Size? fixedSize;
   final BorderSide? side;
   final Color? backgroundColor;
+  final Color? shadowColor;
+  final Size? maximumSize;
+  final Size? minimumSize;
+  final double? elevation;
    const ElevatedButtons({super.key, required this.onPressed,
      required this.child, this.shape, this.fixedSize, this.side,
-     this.backgroundColor,});
+     this.backgroundColor, this.shadowColor, this.maximumSize, this.minimumSize, this.elevation,});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          maximumSize: maximumSize,
+          minimumSize: minimumSize,
           shape: shape,
+          elevation: elevation,
           fixedSize: fixedSize,
           side: side,
+          shadowColor: shadowColor,
           backgroundColor: backgroundColor
         ),
         child: child);
