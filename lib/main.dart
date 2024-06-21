@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:imechanic/features/presentationLayer/pages/homepage/homepage.dart';
 
 import 'features/data/repositiory/viewownpostrepositiory.dart';
-import 'features/presentationLayer/bloc/viewownpostcubit/view_own_post_cubit.dart';
+import 'features/presentationLayer/cubit/viewownpostcubit/view_own_post_cubit.dart';
 import 'features/presentationLayer/pages/splashscreen/splashscreen.dart';
 
 void main() {

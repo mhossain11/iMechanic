@@ -390,22 +390,6 @@ class _YesMechanicState extends State<YesMechanic> {
     );
   }
 
- /* Widget specialistTextInput() {
-    return TextFormFields(
-      controller: specialistController,
-      hint: 'Specialist makes',
-      maxLength: 300,
-      keyboardType: TextInputType.text,
-      enabledBorderSide: const BorderSide(color: Colors.grey),
-      focusedBorderSide: const BorderSide(color: Colors.red),
-      validators: (String value) {
-        return value.isNotEmpty
-            ? null
-            : errorText;
-      },
-
-    );
-  }*/
   imageGallery() async{
 
     try{

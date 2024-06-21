@@ -6,7 +6,7 @@ import 'package:imechanic/features/presentationLayer/widget/textformfield.dart';
 
 import '../../../data/models/userdataModel.dart';
 import '../../../data/repositiory/viewownpostrepositiory.dart';
-import '../../bloc/viewownpostcubit/view_own_post_cubit.dart';
+import '../../cubit/viewownpostcubit/view_own_post_cubit.dart';
 import '../requestdetails/requestdetails.dart';
 
 class ViewOwnPost extends StatefulWidget {

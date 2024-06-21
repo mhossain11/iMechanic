@@ -6,5 +6,6 @@ class ApiUrl{
   static String mechanicRegisterPostUrl = '$baseUrl/mechanicRegister';
   static String userRegisterPostUrl = '$baseUrl/register';
   static String userHomeGetUrl = '$baseUrl/userHome';
+  static String usernameGetUrl = '$baseUrl/regiCheckUser';
 
 }

@@ -4,11 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:imechanic/features/data/repositiory/usernamerepository.dart';
 import 'package:imechanic/features/data/repositiory/userregisterrepository.dart';
-import 'package:imechanic/features/presentationLayer/bloc/userregister/user_register_bloc.dart';
+import 'package:imechanic/features/presentationLayer/cubit/username/user_name_cubit.dart';
 import 'package:imechanic/features/presentationLayer/widget/buttons.dart';
 
 import '../../../../core/util/images.dart';
+import '../../../data/models/usernameModel.dart';
+import '../../bloc/userregisterbloc/user_register_bloc.dart';
 import '../../widget/other/popupicon.dart';
 import '../../widget/textformfield.dart';
 import '../loginpage/loginpage.dart';
@@ -21,6 +24,7 @@ class NoMechanic extends StatefulWidget {
 }
 
 class _NoMechanicState extends State<NoMechanic> {
+  late UserNameCubit userNameCubit;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late UserRegisterBloc userRegisterBloc;
   final TextEditingController fullNameController = TextEditingController();
@@ -31,12 +35,18 @@ class _NoMechanicState extends State<NoMechanic> {
   final TextEditingController conformPasswordController =
       TextEditingController();
   XFile? profileImage;
+  bool filter = false;
+  List<UserName>nameList=[];
   String errorText = "Invalid";
 
-
+  search(){
+    filter =nameList.contains(userNameController.text);
+  }
   @override
   void initState() {
     super.initState();
+    userNameCubit = UserNameCubit(UserNameRepository());
+    userNameCubit.fetchNameData();
     userRegisterBloc = UserRegisterBloc(UserRegisterRepository());
   }
 
@@ -142,27 +152,61 @@ class _NoMechanicState extends State<NoMechanic> {
                   ),
                 ),
                 const SizedBox(height: 10,),
-                SizedBox(
-                  height: 50,
-                  child: TextFormFields(
-                    controller:userNameController,
-                    hint: 'Enter user name',
-                    hintStyle: TextStyle(color: Colors.grey[400]),
-                    minLines: 1,
-                    maxLines: 1,
-                    cursorColor: Colors.red,
-                    keyboardType: TextInputType.number,
-                    enabledBorderSide: const BorderSide(color: Colors.grey),
-                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                    levelText: const Text('User Name'),
-                    validators: (String? value) {
-                      if(value!.isEmpty){
-                        return 'Please enter a username';
-                      }else{
-                        return null;
-                      }
-                    },
-                  ),
+                BlocBuilder<UserNameCubit, UserNameState>(
+                  bloc: userNameCubit,
+  builder: (context, state) {
+    if(state is UserNameLoadedCubitState){
+      //nameList.add(state.usernameModel!.data!.userName!)
+    return SizedBox(
+    height: 50,
+    child: TextFormFields(
+    controller: userNameController,
+    onChanged: (value){
+    setState(() {
+    search();
+    });
+    },
+    hint: 'User Name',
+    hintStyle: TextStyle(color: Colors.grey[400]),
+    minLines: 1,
+    maxLines: 1,
+    cursorColor: Colors.red,
+    keyboardType: TextInputType.text,
+    enabledBorderSide: const BorderSide(color: Colors.grey),
+    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+    levelText: const Text('User name'),
+    suffixIcon: IconButton(
+    onPressed: () {
+    userNameController.clear();
+    setState(() {
+    filter=false;
+    });
+    },
+    icon: userNameController.text.isNotEmpty? const Icon(Icons.clear,color: Colors.black12,):const SizedBox(),
+
+    ),
+    validators: (String? value) {
+    if(value!.isEmpty){
+    return 'Please enter a username';
+    }else{
+    return null;
+    }
+    },
+    ),
+    );
+    }else if(state is UserNameErrorCubitState){
+      return  Text(state.errorMessage);
+    }
+    return const SizedBox();
+  },
+),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // if( userRegisterController.nameList.where((element)=>element.toLowerCase().startsWith(searchText)).toList())
+                    filter == false? const Text('')
+                        :const Text('User name is exist!',style: TextStyle(color: Colors.red),)
+                  ],
                 ),
                 const SizedBox(height: 10,),
                 Row(

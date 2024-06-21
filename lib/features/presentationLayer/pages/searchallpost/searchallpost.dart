@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/userdataModel.dart';
 import '../../../data/repositiory/viewownpostrepositiory.dart';
-import '../../bloc/viewownpostcubit/view_own_post_cubit.dart';
+import '../../cubit/viewownpostcubit/view_own_post_cubit.dart';
 import '../../widget/textformfield.dart';
 import '../requestdetails/requestdetails.dart';
 
