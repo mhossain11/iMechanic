@@ -99,10 +99,12 @@ class _YesMechanicState extends State<YesMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Full name'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a full name';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -120,10 +122,12 @@ class _YesMechanicState extends State<YesMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Email'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a full name';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -141,10 +145,12 @@ class _YesMechanicState extends State<YesMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Mobile Number'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a full name';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -162,10 +168,12 @@ class _YesMechanicState extends State<YesMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('User Name'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a full name';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -186,10 +194,12 @@ class _YesMechanicState extends State<YesMechanic> {
                         enabledBorderSide: const BorderSide(color: Colors.grey),
                         focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                         levelText: const Text('Password'),
-                        validators: (String value) {
-                          return value.isNotEmpty
-                              ? null
-                              : errorText;
+                        validators: (String? value) {
+                          if(value!.isEmpty){
+                            return 'Please enter a full name';
+                          }else{
+                            return null;
+                          }
                         },
                       ),
                     ),
@@ -218,10 +228,12 @@ class _YesMechanicState extends State<YesMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Conform Password'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a full name';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -323,13 +335,13 @@ class _YesMechanicState extends State<YesMechanic> {
                 BlocListener<MechanicRegisterBloc, MechanicRegisterState>(
                   bloc:  machanicRegiterBloc,
                listener: (context, state) {
-                    if(_formKey.currentState!.validate()){
+
                       if(state is MechanicRegisterLoadedState){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                       } else if(state is MechanicRegisterErrorState){
                         print(state.errorMessage);
                       }
-                    }
+
                  },
             child: BlocListener<MechanicRegisterBloc, MechanicRegisterState>(
               bloc:  machanicRegiterBloc,
@@ -348,10 +360,14 @@ class _YesMechanicState extends State<YesMechanic> {
                 builder: (context, state) {
                   return ElevatedButtons(
                     onPressed: () {
-                      machanicRegiterBloc.add(MechanicRegisterSubmitEvent(
-                           fullNameController: fullNameController, userNameController: userNameController,
-                        emailAddressController: emailAddressController, numberController: numberController, passwordController: passwordController, conformPasswordController: conformPasswordController, dropdownValue: dropdownValue,
-                        profileImage: profileImage,proofImage: proofImage, ));
+                   if(_formKey.currentState!.validate()){
+
+                     machanicRegiterBloc.add(MechanicRegisterSubmitEvent(
+                       fullNameController: fullNameController, userNameController: userNameController,
+                       emailAddressController: emailAddressController, numberController: numberController, passwordController: passwordController, conformPasswordController: conformPasswordController, dropdownValue: dropdownValue,
+                       profileImage: profileImage,proofImage: proofImage, ));
+                   }
+
                     },
                     fixedSize: const Size(350, 50),
                     backgroundColor: const Color(0xffc1262c),
@@ -374,7 +390,7 @@ class _YesMechanicState extends State<YesMechanic> {
     );
   }
 
-  Widget specialistTextInput() {
+ /* Widget specialistTextInput() {
     return TextFormFields(
       controller: specialistController,
       hint: 'Specialist makes',
@@ -389,7 +405,7 @@ class _YesMechanicState extends State<YesMechanic> {
       },
 
     );
-  }
+  }*/
   imageGallery() async{
 
     try{

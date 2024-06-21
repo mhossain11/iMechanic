@@ -9,7 +9,7 @@ class TextFormFields extends StatelessWidget{
   final TextInputType keyboardType;
   final BorderSide? enabledBorderSide;
   final BorderSide? focusedBorderSide;
-  final String? Function(String) validators;
+  final String? Function(String?)? validators;
   final Widget? suffixIcon;
   final bool? obscureText;
   final Widget? levelText;
@@ -20,7 +20,7 @@ class TextFormFields extends StatelessWidget{
   const TextFormFields({super.key, required this.hint,  this.minLines,
     this.maxLines, required this.keyboardType, this.enabledBorderSide,
     required this.controller,this.focusedBorderSide, this.maxLength, this.suffixIcon,
-    this.obscureText=false, required this.validators, this.levelText, this.cursorColor, this.hintStyle, this.onChanged, });
+    this.obscureText=false,  this.validators, this.levelText, this.cursorColor, this.hintStyle, this.onChanged, });
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,7 @@ class TextFormFields extends StatelessWidget{
       minLines: minLines,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLines: maxLines,
+      validator: validators,
       keyboardType: keyboardType,
       cursorColor: cursorColor,
       decoration: InputDecoration(

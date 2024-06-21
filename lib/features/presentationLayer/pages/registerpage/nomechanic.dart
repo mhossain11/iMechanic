@@ -86,10 +86,12 @@ class _NoMechanicState extends State<NoMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Full name'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a full name';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -107,10 +109,12 @@ class _NoMechanicState extends State<NoMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Email'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a email address';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -128,10 +132,12 @@ class _NoMechanicState extends State<NoMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Mobile Number'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a mobile number';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -140,7 +146,7 @@ class _NoMechanicState extends State<NoMechanic> {
                   height: 50,
                   child: TextFormFields(
                     controller:userNameController,
-                    hint: 'Enter mobile number',
+                    hint: 'Enter user name',
                     hintStyle: TextStyle(color: Colors.grey[400]),
                     minLines: 1,
                     maxLines: 1,
@@ -148,11 +154,13 @@ class _NoMechanicState extends State<NoMechanic> {
                     keyboardType: TextInputType.number,
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-                    levelText: const Text('Mobile Number'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    levelText: const Text('User Name'),
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a username';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -173,10 +181,12 @@ class _NoMechanicState extends State<NoMechanic> {
                         enabledBorderSide: const BorderSide(color: Colors.grey),
                         focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                         levelText: const Text('Password'),
-                        validators: (String value) {
-                          return value.isNotEmpty
-                              ? null
-                              : errorText;
+                        validators: (String? value) {
+                          if(value!.isEmpty){
+                            return 'Please enter a password';
+                          }else{
+                            return null;
+                          }
                         },
                       ),
                     ),
@@ -206,10 +216,12 @@ class _NoMechanicState extends State<NoMechanic> {
                     enabledBorderSide: const BorderSide(color: Colors.grey),
                     focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Conform Password'),
-                    validators: (String value) {
-                      return value.isNotEmpty
-                          ? null
-                          : errorText;
+                    validators: (String? value) {
+                      if(value!.isEmpty){
+                        return 'Please enter a conform password';
+                      }else{
+                        return null;
+                      }
                     },
                   ),
                 ),
@@ -258,25 +270,28 @@ class _NoMechanicState extends State<NoMechanic> {
                     builder: (context, state) {
                       return ElevatedButtons(
                         onPressed: () {
-                          userRegisterBloc.add(UserRegisterSubmitEvent(
-                              fullNameController: fullNameController,
-                              userNameController: userNameController,
-                              emailAddressController: emailController,
-                              numberController: numberController,
-                              passwordController: passwordController,
-                              conformPasswordController:
-                                  conformPasswordController));
-                        },
-                        fixedSize: const Size(350, 50),
-                        backgroundColor: const Color(0xffc1262c),
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: (state is UserRegisterLoadingState)
-                            ? const CircularProgressIndicator(
-                                color: Colors.green,
-                              )
-                            : const Text('Submit',
-                                style: TextStyle(color: Colors.white)),
+                          if (_formKey.currentState!.validate()) {
+
+                        userRegisterBloc.add(UserRegisterSubmitEvent(
+                        fullNameController: fullNameController,
+                        userNameController: userNameController,
+                        emailAddressController: emailController,
+                        numberController: numberController,
+                        passwordController: passwordController,
+                        conformPasswordController:
+                        conformPasswordController));
+                      }
+
+                          },
+                          fixedSize: const Size(350, 50),
+                          backgroundColor: const Color(0xffc1262c),
+                          shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                          child: (state is UserRegisterLoadingState)
+                          ? const CircularProgressIndicator(
+                          color: Colors.green,
+                          )
+                              : const Text('Submit',style: TextStyle(color: Colors.white)),
                       );
                     },
                   ),

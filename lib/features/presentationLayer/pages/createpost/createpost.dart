@@ -138,7 +138,7 @@ class _CreatePostState extends State<CreatePost> {
                 keyboardType: TextInputType.text,
                 enabledBorderSide: const BorderSide(color: Colors.grey),
                 focusedBorderSide: const BorderSide(color: Colors.blue),
-                validators: (String value) {
+                validators: (String? value) {
                   return null;
                 },
               ),

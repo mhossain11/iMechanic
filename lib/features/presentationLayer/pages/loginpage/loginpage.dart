@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                           focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                           suffixIcon: const Icon(Icons.email),
                           validators: (value) {
-                            return  validateEmail(value);
+                            return  validateEmail(value!);
 
                           },
 
@@ -113,8 +113,8 @@ class _LoginPageState extends State<LoginPage> {
                           enabledBorderSide: const BorderSide(color: Colors.grey),
                           focusedBorderSide: const BorderSide(color: Colors.blueAccent),
                           suffixIcon: const Icon(Icons.visibility),
-                          validators: (String value) {
-                            return validatePassword(value)== null ?
+                          validators: (String? value) {
+                            return validatePassword(value!)== null ?
                             "Please enter your valid password!" : "Invalid";
                           },
 
