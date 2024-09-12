@@ -2,12 +2,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
+const themeColor = Color(0xff113f68);
 const colorTheme = Color(0xFF0C011A);
 const colorTheme20 = Color(0xFF210128);
 const colorThemeLight = Color(0xFF00FFFF);
 const colorAccent = Color(0x0D000000);
-const MaterialColor kPrimaryColor = const MaterialColor(
+const MaterialColor kPrimaryColor = const MaterialColor( 
   0xFFD33A37,
   const <int, Color>{
     50: const Color(0xFF063B6D),

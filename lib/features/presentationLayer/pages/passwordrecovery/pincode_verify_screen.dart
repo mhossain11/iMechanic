@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:surefix_ai/utils/colors.dart';
-
-import '../../../helpers/ProjectResource.dart';
-import '../../../helpers/snackbars.dart';
-import '../login/login.dart';
+import '../../../../config/colors/colors.dart';
+import '../../../../core/conostants/responsivescreen.dart';
+import '../../widget/other/snackbars.dart';
+import '../loginpage/loginpage.dart';
 import 'reset_password_screen.dart';
 
 class PinCodeVerifyScreen extends StatefulWidget {
@@ -61,7 +60,7 @@ class _PinCodeVerifyScreenState extends State<PinCodeVerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ProjectResource.setScreenSize(context);
+    Responsive.setScreenSize(context);
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -157,7 +156,7 @@ class _PinCodeVerifyScreenState extends State<PinCodeVerifyScreen> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) =>  LoginScreen(),
+                            MaterialPageRoute(builder: (context) =>  const LoginPage(),
                             ),
                             //(route) => false,
                           );

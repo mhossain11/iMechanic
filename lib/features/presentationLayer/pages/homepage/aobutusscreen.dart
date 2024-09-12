@@ -2,20 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gap/gap.dart';
 
-import '../../helpers/ProjectResource.dart';
-import '../../utils/colors.dart';
-import '../../utils/images.dart';
-import '../Dashboard/homepage.dart';
+import '../../../../config/colors/colors.dart';
+import '../../../../core/conostants/responsivescreen.dart';
+import '../../../../core/util/images.dart';
+import 'homepage.dart';
+
+
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ProjectResource.setScreenSize(context);
+    Responsive.setScreenSize(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar:AppBar(
         title: const Text('About Us',style: TextStyle(color: Colors.white)),
         centerTitle: true,
@@ -37,7 +41,7 @@ class AboutUsScreen extends StatelessWidget {
           children: [
              SizedBox(
               width: MediaQuery.sizeOf(context).width,
-              child: Center(
+              child: const Center(
                 child: Card(
                   color: Colors.white,
                   elevation: 0,
@@ -45,7 +49,7 @@ class AboutUsScreen extends StatelessWidget {
                     child: Text('Surefix designed by mechanics for mechanics',textAlign: TextAlign.center,maxLines: 2,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 25),)),
               ),
             ),
-            const SizedBox(height: 15,),
+            const Gap(15),
             Container(
               color: Colors.white,
               child: const Padding(padding: EdgeInsets.all(10.0),

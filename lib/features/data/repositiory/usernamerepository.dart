@@ -1,22 +1,20 @@
 import 'dart:convert';
 
 import 'package:imechanic/core/util/apiUrl.dart';
-
-import '../../presentationLayer/widget/other/snackbars.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/usernameModel.dart';
 import 'package:http/http.dart'as http;
 
 class UserNameRepository{
  late UsernameModel usernameModel;
   Future<UsernameModel>userNameList() async {
-
+    SharedPreferences sp =await SharedPreferences.getInstance();
+    var userToken  = sp.getString('spToken');
     var response = await http.get(Uri.parse(ApiUrl.usernameGetUrl),
+
         headers: {
           'Content-Type': 'application/json',
-          'Accept': '*/*',
-          'Connection':'keep-alive',
-          'Accept-Encoding':'gzip, deflate, br',
-          'Authorization': 'Bearer 118|qtTBufTzwKH5va62GwoDP7n83q0Bse21DqXx2NEdca41a0fa',
+          'Authorization': 'Bearer $userToken',
         });
     // print('Token : $token');
     print('Data show');
@@ -33,8 +31,7 @@ class UserNameRepository{
         nameList.add(name.toString());
       }*/
       print('Data Uploaded');
-      // nameList = jsonDecode(response.body.toString());
-    //  print(nameList.length);
+
 
       print('nameEnd');
       return usernameModel;

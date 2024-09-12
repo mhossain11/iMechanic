@@ -37,7 +37,7 @@ final double pi = 3.1415926535897932;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,21 +45,9 @@ final double pi = 3.1415926535897932;
           Center(
             child: Container(
               width: 300,
-                decoration:  BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
-                  color: Colors.grey[100],
-                  gradient: LinearGradient(
-                    begin: FractionalOffset.topLeft,
-                    end: FractionalOffset.bottomRight,
-                    colors: [
-                    ],
-                    stops: [
-                    ],
-                    transform: GradientRotation(pi / 4),
-                  ),
-                ),
+                color:Colors.white,
 
-                child: Image.asset('assets/animations/surefix3.gif')),
+                child: Image.asset('assets/animations/SurefixAICarAnimation.gif')),
           ),
         ],
       ),

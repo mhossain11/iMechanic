@@ -41,6 +41,10 @@ dependencies:
   bloc: ^8.1.4
   equatable: ^2.0.5
   http: ^1.2.1
+  shared_preferences: ^2.2.3
+  multi_dropdown: ^2.1.4
+  gap: ^3.0.1
+  pin_code_fields: ^8.0.1
 
 dev_dependencies:
   flutter_test:

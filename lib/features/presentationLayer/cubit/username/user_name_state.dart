@@ -15,7 +15,7 @@ class UserNameLoadingCubitState extends UserNameState{
 }
 class UserNameLoadedCubitState extends UserNameState {
   final UsernameModel usernameModel;
-  const UserNameLoadedCubitState(this.usernameModel);
+  const   UserNameLoadedCubitState(this.usernameModel);
 
   @override
   List<Object?> get props => [usernameModel];

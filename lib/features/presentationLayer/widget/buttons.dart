@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../config/colors/colors.dart';
-import '../../../core/conostants/constants.dart';
+import '../../../core/conostants/responsivescreen.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -27,8 +27,8 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ButtonTheme(
       buttonColor: color ?? colorTheme,
-      height: height ?? Value.screenHeight * .055,
-      minWidth: width ?? Value.screenWidth,
+      height: height ?? Responsive.screenHeight * .055,
+      minWidth: width ?? Responsive.screenWidth,
 
       child: MaterialButton(
         elevation: elevation,

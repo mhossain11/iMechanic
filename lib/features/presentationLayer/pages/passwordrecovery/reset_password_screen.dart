@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:surefix_ai/utils/colors.dart';
-import 'package:surefix_ai/views/Auth/login/login.dart';
 
-import '../../../helpers/ProjectResource.dart';
-import '../../../helpers/snackbars.dart';
+import '../../../../config/colors/colors.dart';
+import '../../../../core/conostants/responsivescreen.dart';
+import '../../widget/other/snackbars.dart';
+import '../loginpage/loginpage.dart';
 
 
 
@@ -35,7 +35,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
        if (_formKey.currentState?.validate() == true) {
          Navigator.pushReplacement(
            context,
-           MaterialPageRoute(builder: (context) =>  LoginScreen(),
+           MaterialPageRoute(builder: (context) =>  LoginPage(),
            ),
          );
        }else{
@@ -56,7 +56,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ProjectResource.setScreenSize(context);
+    Responsive.setScreenSize(context);
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -123,7 +123,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) =>  LoginScreen(),
+                            MaterialPageRoute(builder: (context) =>  const LoginPage(),
                             ),
                                 //(route) => false,
                           );

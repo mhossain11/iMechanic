@@ -1,13 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:surefix_ai/utils/colors.dart';
-import 'package:surefix_ai/views/Auth/passwordRecovery/pincode_verify_screen.dart';
-import 'package:provider/provider.dart';
+import '../../../../config/colors/colors.dart';
+import '../../../../core/conostants/responsivescreen.dart';
+import '../../widget/other/snackbars.dart';
 
-import '../../../controller/emailverify_controller.dart';
-import '../../../helpers/ProjectResource.dart';
-import '../../../helpers/snackbars.dart';
 
 
 class EmailVerifyScreen extends StatefulWidget {
@@ -18,24 +15,12 @@ class EmailVerifyScreen extends StatefulWidget {
 }
 
 class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
-  late EmailVerifyController emailVerifyController;
-  late EmailVerifyController  emailVerifyControllerVar;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-
-    });
-
   }
 
-
-  @override
-  void didChangeDependencies() {
-    emailVerifyController = Provider.of<EmailVerifyController>(context, listen: false);
-    emailVerifyControllerVar = Provider.of<EmailVerifyController>(context, listen: true);
-    super.didChangeDependencies();
-  }
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -50,7 +35,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
 
   void _submit() {
     if (_formKey.currentState?.validate() == true) {
-      emailVerifyController.emailSend(context: context);
+     // emailSend(context: context);
      /* Navigator.push(
         context,
         MaterialPageRoute(
@@ -69,13 +54,13 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
 
   @override
   void dispose() {
-    emailVerifyController.emailController.clear();
+    emailController.clear();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    ProjectResource.setScreenSize(context);
+    Responsive.setScreenSize(context);
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -111,7 +96,7 @@ class _EmailVerifyScreenState extends State<EmailVerifyScreen> {
                 ),
                 const Gap(16),
                 TextFormField(
-                  controller:emailVerifyController.emailController,
+                  controller:emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration:
                   const InputDecoration(hintText: 'Enter your email'),

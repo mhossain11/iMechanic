@@ -9,6 +9,7 @@ import 'package:imechanic/features/data/repositiory/userregisterrepository.dart'
 import 'package:imechanic/features/presentationLayer/cubit/username/user_name_cubit.dart';
 import 'package:imechanic/features/presentationLayer/widget/buttons.dart';
 
+import '../../../../config/colors/colors.dart';
 import '../../../../core/util/images.dart';
 import '../../../data/models/usernameModel.dart';
 import '../../bloc/userregisterbloc/user_register_bloc.dart';
@@ -34,14 +35,18 @@ class _NoMechanicState extends State<NoMechanic> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController conformPasswordController =
       TextEditingController();
+  bool isNameShowVisible = false;
   XFile? profileImage;
   bool filter = false;
-  List<UserName>nameList=[];
+  List<String> nameList = [];
   String errorText = "Invalid";
 
-  search(){
-    filter =nameList.contains(userNameController.text);
+  search() {
+    print(nameList.toString());
+    filter = nameList.contains(userNameController.text);
+
   }
+
   @override
   void initState() {
     super.initState();
@@ -64,6 +69,8 @@ class _NoMechanicState extends State<NoMechanic> {
 
   @override
   Widget build(BuildContext context) {
+    print(nameList.length);
+    print(nameList);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registration'),
@@ -73,7 +80,10 @@ class _NoMechanicState extends State<NoMechanic> {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               Navigator.pop(context);
             },
-            child: Image.asset(Images.backIcon,color: Colors.red,)),
+            child: Image.asset(
+              Images.backIcon,
+              color: Colors.red,
+            )),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -82,11 +92,13 @@ class _NoMechanicState extends State<NoMechanic> {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                const SizedBox(height: 40,),
+                const SizedBox(
+                  height: 40,
+                ),
                 SizedBox(
                   height: 50,
                   child: TextFormFields(
-                    controller:fullNameController,
+                    controller: fullNameController,
                     hint: 'Enter full Name',
                     hintStyle: TextStyle(color: Colors.grey[400]),
                     minLines: 1,
@@ -94,18 +106,21 @@ class _NoMechanicState extends State<NoMechanic> {
                     cursorColor: Colors.red,
                     keyboardType: TextInputType.text,
                     enabledBorderSide: const BorderSide(color: Colors.grey),
-                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    focusedBorderSide:
+                        const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Full name'),
                     validators: (String? value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'Please enter a full name';
-                      }else{
+                      } else {
                         return null;
                       }
                     },
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 SizedBox(
                   height: 50,
                   child: TextFormFields(
@@ -117,22 +132,25 @@ class _NoMechanicState extends State<NoMechanic> {
                     cursorColor: Colors.red,
                     keyboardType: TextInputType.emailAddress,
                     enabledBorderSide: const BorderSide(color: Colors.grey),
-                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    focusedBorderSide:
+                        const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Email'),
                     validators: (String? value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'Please enter a email address';
-                      }else{
+                      } else {
                         return null;
                       }
                     },
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 SizedBox(
                   height: 50,
                   child: TextFormFields(
-                    controller:numberController,
+                    controller: numberController,
                     hint: 'Enter mobile number',
                     hintStyle: TextStyle(color: Colors.grey[400]),
                     minLines: 1,
@@ -140,75 +158,138 @@ class _NoMechanicState extends State<NoMechanic> {
                     cursorColor: Colors.red,
                     keyboardType: TextInputType.number,
                     enabledBorderSide: const BorderSide(color: Colors.grey),
-                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    focusedBorderSide:
+                        const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Mobile Number'),
                     validators: (String? value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'Please enter a mobile number';
-                      }else{
+                      } else {
                         return null;
                       }
                     },
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 BlocBuilder<UserNameCubit, UserNameState>(
                   bloc: userNameCubit,
-  builder: (context, state) {
-    if(state is UserNameLoadedCubitState){
-      //nameList.add(state.usernameModel!.data!.userName!)
-    return SizedBox(
-    height: 50,
-    child: TextFormFields(
-    controller: userNameController,
-    onChanged: (value){
-    setState(() {
-    search();
-    });
-    },
-    hint: 'User Name',
-    hintStyle: TextStyle(color: Colors.grey[400]),
-    minLines: 1,
-    maxLines: 1,
-    cursorColor: Colors.red,
-    keyboardType: TextInputType.text,
-    enabledBorderSide: const BorderSide(color: Colors.grey),
-    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
-    levelText: const Text('User name'),
-    suffixIcon: IconButton(
-    onPressed: () {
-    userNameController.clear();
-    setState(() {
-    filter=false;
-    });
-    },
-    icon: userNameController.text.isNotEmpty? const Icon(Icons.clear,color: Colors.black12,):const SizedBox(),
-
-    ),
-    validators: (String? value) {
-    if(value!.isEmpty){
-    return 'Please enter a username';
-    }else{
-    return null;
-    }
-    },
-    ),
-    );
-    }else if(state is UserNameErrorCubitState){
-      return  Text(state.errorMessage);
-    }
-    return const SizedBox();
-  },
-),
+                  builder: (context, state) {
+                    if (state is UserNameLoadedCubitState) {
+                      nameList.clear();
+                      for (var i = 0;
+                          i < state.usernameModel.data!.userName!.length;
+                          i++) {
+                        nameList.add(state
+                            .usernameModel.data!.userName![i].name!
+                            .toString());
+                      }
+                      return SizedBox(
+                        height: 50,
+                        child: TextFormFields(
+                          controller: userNameController,
+                          onChanged: (value) {
+                            setState(() {
+                              search();
+                            });
+                          },
+                          hint: 'User Name',
+                          hintStyle: TextStyle(color: Colors.grey[400]),
+                          minLines: 1,
+                          maxLines: 1,
+                          cursorColor: Colors.red,
+                          keyboardType: TextInputType.text,
+                          enabledBorderSide:
+                              const BorderSide(color: Colors.grey),
+                          focusedBorderSide:
+                              const BorderSide(color: Colors.blueAccent),
+                          levelText: const Text('User name'),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              userNameController.clear();
+                              setState(() {
+                                filter = false;
+                              });
+                            },
+                            icon: userNameController.text.isNotEmpty
+                                ? const Icon(
+                                    Icons.clear,
+                                    color: Colors.black12,
+                                  )
+                                : const SizedBox(),
+                          ),
+                          validators: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a username';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                      );
+                    } else if (state is UserNameErrorCubitState) {
+                      return Text(state.errorMessage);
+                    }
+                    return SizedBox(
+                      height: 50,
+                      child: TextFormFields(
+                        controller: userNameController,
+                        onChanged: (value) {
+                          setState(() {
+                            search();
+                          });
+                        },
+                        hint: 'User Name',
+                        hintStyle: TextStyle(color: Colors.grey[400]),
+                        minLines: 1,
+                        maxLines: 1,
+                        cursorColor: Colors.red,
+                        keyboardType: TextInputType.text,
+                        enabledBorderSide: const BorderSide(color: Colors.grey),
+                        focusedBorderSide:
+                            const BorderSide(color: Colors.blueAccent),
+                        levelText: const Text('User name'),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            userNameController.clear();
+                            setState(() {
+                              filter = false;
+                            });
+                          },
+                          icon: userNameController.text.isNotEmpty
+                              ? const Icon(
+                                  Icons.clear,
+                                  color: Colors.black12,
+                                )
+                              : const SizedBox(),
+                        ),
+                        validators: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter a username';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                    );
+                  },
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     // if( userRegisterController.nameList.where((element)=>element.toLowerCase().startsWith(searchText)).toList())
-                    filter == false? const Text('')
-                        :const Text('User name is exist!',style: TextStyle(color: Colors.red),)
+                    filter == false
+                        ? const Text('')
+                        : const Text(
+                            'User name is exist!',
+                            style: TextStyle(color: Colors.red),
+                          )
                   ],
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     SizedBox(
@@ -223,12 +304,13 @@ class _NoMechanicState extends State<NoMechanic> {
                         cursorColor: Colors.red,
                         keyboardType: TextInputType.text,
                         enabledBorderSide: const BorderSide(color: Colors.grey),
-                        focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                        focusedBorderSide:
+                            const BorderSide(color: Colors.blueAccent),
                         levelText: const Text('Password'),
                         validators: (String? value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return 'Please enter a password';
-                          }else{
+                          } else {
                             return null;
                           }
                         },
@@ -237,20 +319,19 @@ class _NoMechanicState extends State<NoMechanic> {
                     const SizedBox(
                         width: 20,
                         height: 30,
-                        child:   PopupIcons(
+                        child: PopupIcons(
                             icon: Icons.info_rounded,
-                            color: Color(0xffe1306c),
-                            text: '8 Character Password ')
-
-                    )
+                            color: Colors.grey,
+                            text: '8 Character Password '))
                   ],
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 SizedBox(
-                  width: 345,
                   height: 50,
                   child: TextFormFields(
-                    controller:conformPasswordController,
+                    controller: conformPasswordController,
                     hint: 'Enter conform password',
                     hintStyle: TextStyle(color: Colors.grey[400]),
                     minLines: 1,
@@ -258,12 +339,13 @@ class _NoMechanicState extends State<NoMechanic> {
                     cursorColor: Colors.red,
                     keyboardType: TextInputType.text,
                     enabledBorderSide: const BorderSide(color: Colors.grey),
-                    focusedBorderSide: const BorderSide(color: Colors.blueAccent),
+                    focusedBorderSide:
+                        const BorderSide(color: Colors.blueAccent),
                     levelText: const Text('Conform Password'),
                     validators: (String? value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'Please enter a conform password';
-                      }else{
+                      } else {
                         return null;
                       }
                     },
@@ -284,7 +366,7 @@ class _NoMechanicState extends State<NoMechanic> {
                   onPressed: () {
                     profileImages();
                   },
-                  side: const BorderSide(color: Color(0xffc1262c)),
+                  side: const BorderSide(color: themeColor),
                   fixedSize: const Size(300, 50),
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -315,27 +397,26 @@ class _NoMechanicState extends State<NoMechanic> {
                       return ElevatedButtons(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-
-                        userRegisterBloc.add(UserRegisterSubmitEvent(
-                        fullNameController: fullNameController,
-                        userNameController: userNameController,
-                        emailAddressController: emailController,
-                        numberController: numberController,
-                        passwordController: passwordController,
-                        conformPasswordController:
-                        conformPasswordController));
-                      }
-
-                          },
-                          fixedSize: const Size(350, 50),
-                          backgroundColor: const Color(0xffc1262c),
-                          shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                          child: (state is UserRegisterLoadingState)
-                          ? const CircularProgressIndicator(
-                          color: Colors.green,
-                          )
-                              : const Text('Submit',style: TextStyle(color: Colors.white)),
+                            userRegisterBloc.add(UserRegisterSubmitEvent(
+                                fullNameController: fullNameController,
+                                userNameController: userNameController,
+                                emailAddressController: emailController,
+                                numberController: numberController,
+                                passwordController: passwordController,
+                                conformPasswordController:
+                                    conformPasswordController));
+                          }
+                        },
+                        fixedSize: const Size(350, 50),
+                        backgroundColor: const Color(0xffc1262c),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child: (state is UserRegisterLoadingState)
+                            ? const CircularProgressIndicator(
+                                color: Colors.green,
+                              )
+                            : const Text('Submit',
+                                style: TextStyle(color: Colors.white)),
                       );
                     },
                   ),
